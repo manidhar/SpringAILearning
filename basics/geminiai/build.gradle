@@ -26,13 +26,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.ai:spring-ai-starter-model-google-genai'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
-    developmentOnly 'org.springframework.ai:spring-ai-spring-boot-docker-compose'
+    //developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+    //developmentOnly 'org.springframework.ai:spring-ai-spring-boot-docker-compose'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-jdbc'
+    //implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-jdbc'
 
-    runtimeOnly 'com.h2database:h2'
+   // runtimeOnly 'com.h2database:h2'
 }
 
 dependencyManagement {

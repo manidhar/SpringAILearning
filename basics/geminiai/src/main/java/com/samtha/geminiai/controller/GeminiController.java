@@ -18,24 +18,31 @@ import java.util.Map;
 @RequestMapping("/api")
 public class GeminiController {
 
-    private final ChatClient chatClient;
-    private final String OVERIDDEN_SYSTEM_PROMPT = """
-            You are an internal IT helpdesk assistant. Your role is to assist\s
-            employees with IT-related issues such as resetting passwords,\s
-            unlocking accounts, and answering questions related to IT policies.
-            If a user requests help with anything outside of these\s
-            responsibilities, respond politely and inform them that you are\s
-            only able to assist with IT support tasks within your defined scope.
-             """;
+    private final String DEFAULT_SYSTEM_PROMPT = """
+            You are an internal HR assistant. Your role is to help \s
+                        employees with questions related to HR policies such as  \s
+                        leave policies, working hours, benefits and code of conduct. \s
+                        If a user asks for help with anything outside of these topics, \s
+                        kindly inform them that you can only assist with queries related to HR policies.
+            """;
 
-    public GeminiController(ChatClient chatClient) {
-        this.chatClient = chatClient;
+    private final ChatClient chatClient;
+    public GeminiController(ChatClient.Builder chatClientBuilder) {
+        this.chatClient = chatClientBuilder.build();
     }
 
-    @GetMapping("/gemini")
+    @GetMapping("/chat")
     public String getChatResponse(@RequestParam("message") String message){
         return chatClient.prompt(message)
-                .system(OVERIDDEN_SYSTEM_PROMPT)
+                .user(message)
+                .call()
+                .content();
+    }
+
+    @GetMapping("/hrchat")
+    public String hrChat(@RequestParam("message") String message) {
+        return chatClient.prompt()
+                .system(DEFAULT_SYSTEM_PROMPT)
                 .user(message)
                 .call()
                 .content();
